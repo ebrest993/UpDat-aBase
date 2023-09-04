@@ -14,91 +14,135 @@ require('./config/connection').mysql();
 // app.use('/api', apiRoutes);
 
 // app.use('*', (req, res) => {
-//     res.status(404).end();
-// });
-
-// app.listen(PORT, () => {
-//     console.log(`Server running on http://localhost:${PORT}`);
-// });
-
-inquirer.prompt([
-    {
-        name:"choice",
-        type:"list",
-        message:"What would you like to do?",
-        choices: [
-            "View All Employees",
-            "Add Employee",
-            "Update Employee Role",
-            "View All Roles",
-            "Add Role",
-            "View All Departments",
-            "Add Department"
-        ]
-    }])
-        .then((answers) => {
-            const { choice } = answers;
-            if(choice === "View All Employees") {
-                viewEmployees();
-            }
-            if(choice === "Add Employee"){
-                addEmployee();
-            }
-            if(choice === "Update Employee Role"){
-                updateRole();
-            }
-            if(choice === "View All Roles"){
-                viewRoles();
-            }
-            if(choice === "Add Role"){
-                addRole();
-            }
-            if(choice === "View All Departments"){
-                viewDepartments();
-            }
-            if(choice === "Add Department"){
-                addDepartment();
-            }
-        })
+    //     res.status(404).end();
+    // });
     
-const viewEmployees = () => {
+    // app.listen(PORT, () => {
+        //     console.log(`Server running on http://localhost:${PORT}`);
+        // });
+const trackEmployee = () => {
     inquirer.prompt([
         {
-            name:"test2",
-            type: "list",
-            message:"Did it work?",
+            name:"choice",
+            type:"list",
+            message:"What would you like to do?",
             choices: [
-                "Yes",
-                "No"
+                "View All Employees",
+                "Add Employee",
+                "Update Employee Role",
+                "View All Roles",
+                "Add Role",
+                "View All Departments",
+                "Add Department"
             ]
         }
     ])
-}
-
-const addEmployee = () => {
-    console.log('you made it to add');
-}
-
-
-const updateRole = () => {
-    console.log('you made it to update');
-}
-
-
-const viewRoles = () => {
-    console.log('you made it to view roles');
-}
-
-
-const addRole = () => {
-    console.log('you made it to add role');
-}
-
-
-const viewDepartments = () => {
-    console.log('you made it to view dept');
-}
+    .then((answers) => {
+        const { choice } = answers;
+        if(choice === "View All Employees") {
+            viewEmployees();
+        }
+        if(choice === "Add Employee"){
+            addEmployee();
+        }
+        if(choice === "Update Employee Role"){
+            updateRole();
+        }
+        if(choice === "View All Roles"){
+            viewRoles();
+        }
+        if(choice === "Add Role"){
+            addRole();
+        }
+        if(choice === "View All Departments"){
+            viewDepartments();
+        }
+        if(choice === "Add Department"){
+            addDepartment();
+        }
+    })
     
-const addDepartment = () => {
-    console.log('you made it to add dept');
+    const viewEmployees = () => {
+        console.log("figure out how to display schema table");
+        trackEmployee();
+    }
+    
+    const addEmployee = () => {
+        inquirer.prompt([
+            {
+                name:"add_first_name",
+                type:"input",
+                message:"What is the employee's first name?"
+            },
+            {
+                name:"add_second_name",
+                type:"input",
+                message:"What is the employee's last name?"
+            }
+        ])
+    trackEmployee();
+    }
+
+    
+    const updateRole = () => {
+        inquirer.prompt([
+            {
+                name:"update_role",
+                type: "list",
+                message:"Which role would you like to update?",
+                choices: [
+                    "Sales Lead",
+                    "Salesperson",
+                    "Lead Engineer",
+                    "Software Engineer",
+                    "Account Manager",
+                    "Accountant",
+                    "Legal Team Lead",
+                    "Lawyer"
+                ]
+            }
+        ])
+        .then(() => {console.info('You need to come back and add all the stipulations of what comes next.');})
+            trackEmployee();
+        }
+        
+        
+    const viewRoles = () => {
+        console.log('find out how to display all the roles');
+        trackEmployee();
+    }
+    
+    
+    const addRole = () => {
+        inquirer.prompt([
+            {
+                name:"add_role",
+                type:"input",
+                message:"What is the name of the new role?"
+            },
+        ])
+        .then(() => {console.info('You need to figure out how to add the new role to the table data')})
+            trackEmployee();
+    }
+    
+        const viewDepartments = () => {
+            console.log('find out how to display the departments');
+            trackEmployee();
+        }
+        
+    const addDepartment = () => {
+        inquirer.prompt([
+            {
+                name:"add_department",
+                type:"input",
+                message:"What is the name of the new department?"
+            },
+        ])
+        .then(() => {
+            console.info('You need to figure out how to add this to the table data')
+            trackEmployee();
+        })
+    }
 }
+
+trackEmployee();
