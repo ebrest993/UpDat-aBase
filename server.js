@@ -37,9 +37,22 @@ inquirer.prompt([
         ]
     }])
         .then((answers) => {
-            // const { choices } = answers;
-            if(answers === "View All Employees") {
-                
+            const { choices } = answers;
+            if(choices === "View All Employees") {
+                viewEmployees();
             }
         })
     
+const viewEmployees = () => {
+    inquirer.prompt([
+        {
+            name:"test2",
+            type: "list",
+            message:"Did it work?",
+            choices: [
+                "Yes",
+                "No"
+            ]
+        }
+    ])
+}
