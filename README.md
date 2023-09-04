@@ -191,10 +191,10 @@ quit
 Okay based on what you have currently
 <!-- First Step
 See if you can install the following libraries asciiart-logo and inquirer. -->
-Second Step
-You want to create a connection to you MySQL database. So think about you will have to setup a connection.js file in your db folder that will have the configurations to create a connection with your MySQL database. For this step refer to your previous Mini Activity on the Movie Database to see how did you a connection there
-Third Step
-Double Check that your Table Schemas are correct and then Create the database
+<!-- Second Step
+You want to create a connection to you MySQL database. So think about you will have to setup a connection.js file in your db folder that will have the configurations to create a connection with your MySQL database. For this step refer to your previous Mini Activity on the Movie Database to see how did you a connection there -->
+<!-- Third Step
+Double Check that your Table Schemas are correct and then Create the database -->
 Fourth Step
 In your index.js file, this is where most of the CRUD methods will be done related to Loading and displaying the prompts. So you will have to make use on the inquirer library that you installed early on.
 So think of how you need to create CRUD functions for the role, employee and departments.
