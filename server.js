@@ -23,7 +23,7 @@ require('./config/connection').mysql();
 
 inquirer.prompt([
     {
-        name:"test",
+        name:"choice",
         type:"list",
         message:"What would you like to do?",
         choices: [
@@ -37,9 +37,27 @@ inquirer.prompt([
         ]
     }])
         .then((answers) => {
-            const { choices } = answers;
-            if(choices === "View All Employees") {
+            const { choice } = answers;
+            if(choice === "View All Employees") {
                 viewEmployees();
+            }
+            if(choice === "Add Employee"){
+                addEmployee();
+            }
+            if(choice === "Update Employee Role"){
+                updateRole();
+            }
+            if(choice === "View All Roles"){
+                viewRoles();
+            }
+            if(choice === "Add Role"){
+                addRole();
+            }
+            if(choice === "View All Departments"){
+                viewDepartments();
+            }
+            if(choice === "Add Department"){
+                addDepartment();
             }
         })
     
@@ -55,4 +73,32 @@ const viewEmployees = () => {
             ]
         }
     ])
+}
+
+const addEmployee = () => {
+    console.log('you made it to add');
+}
+
+
+const updateRole = () => {
+    console.log('you made it to update');
+}
+
+
+const viewRoles = () => {
+    console.log('you made it to view roles');
+}
+
+
+const addRole = () => {
+    console.log('you made it to add role');
+}
+
+
+const viewDepartments = () => {
+    console.log('you made it to view dept');
+}
+    
+const addDepartment = () => {
+    console.log('you made it to add dept');
 }
