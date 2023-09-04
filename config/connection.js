@@ -9,10 +9,10 @@ module.exports = {
         {
           host: '127.0.0.1',
           user: 'root',
-          password: 'bootcamp',
-          database: 'movies_db'
+          password: 'abracadabra',
+          database: 'tracker_db'
         },
-        console.log(`Connected to the movies_db database.`)
+        console.log(`Connected to the tracker_db database.`)
       );
     }
 
