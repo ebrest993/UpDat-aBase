@@ -155,3 +155,37 @@ You are required to submit BOTH of the following for review:
 * A walkthrough video demonstrating the functionality of the application.
 
 * The URL of the GitHub repository, with a unique name and a README describing the project.
+
+you'll want to create schema and seeds
+check for bonus and required
+
+INQUIRER QUESTIONS
+#1. What would you like to do?
+view all employees
+    - shows whole table
+view all employees by department
+    -which department would you like to see employees for?
+        
+view all employees by manager
+add employee 
+    -first name
+    -last name
+    -role
+    -manager
+remove employee 
+    -which employee
+update employee role
+    -which employee
+    -what's their new role
+update employee manager
+    -which employee
+    -who's the new manager
+view all roles
+add role
+remove role
+view all departments
+add department
+remove department
+view total utilized budget by department
+quit
+
