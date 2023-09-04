@@ -163,29 +163,91 @@ INQUIRER QUESTIONS
 #1. What would you like to do?
 view all employees
     - shows whole table
-view all employees by department
+BONUS: view all employees by department
     -which department would you like to see employees for?
-        
-view all employees by manager
+BONUS: view all employees by manager
 add employee 
     -first name
     -last name
     -role
     -manager
-remove employee 
+BONUS: remove employee 
     -which employee
 update employee role
     -which employee
     -what's their new role
-update employee manager
+BONUS: update employee manager
     -which employee
     -who's the new manager
 view all roles
 add role
-remove role
+BONUS: remove role
 view all departments
 add department
-remove department
-view total utilized budget by department
+BONUS: remove department
+BONUS: view total utilized budget by department
 quit
 
+Okay based on what you have currently
+<!-- First Step
+See if you can install the following libraries asciiart-logo and inquirer. -->
+Second Step
+You want to create a connection to you MySQL database. So think about you will have to setup a connection.js file in your db folder that will have the configurations to create a connection with your MySQL database. For this step refer to your previous Mini Activity on the Movie Database to see how did you a connection there
+Third Step
+Double Check that your Table Schemas are correct and then Create the database
+Fourth Step
+In your index.js file, this is where most of the CRUD methods will be done related to Loading and displaying the prompts. So you will have to make use on the inquirer library that you installed early on.
+So think of how you need to create CRUD functions for the role, employee and departments.
+Then you will have a main function that will be dedicated loading the user prompts and based on what the user communcates to the prompt it will call one of the CRUD functions you’ve defined
+For Example, something like this
+function loadMainPrompts() {
+ prompt([
+  {
+   type: "list",
+   name: "choice",
+   message: "What would you like to do?",
+   choices: [
+    {
+     name: "Add Employee",
+     value: "ADD_EMPLOYEE"
+    },
+    {
+     name: "Remove Employee",
+     value: "REMOVE_EMPLOYEE"
+    },
+    {
+     name: "Quit",
+     value: "QUIT"
+    }
+   ]
+  }
+ ]).then(res => {
+  let choice = res.choice;
+  switch (choice)
+   case "ADD_EMPLOYEE":
+    addEmployee();
+    break;
+   case "REMOVE_EMPLOYEE":
+    removeEmployee();
+    break;
+   default:
+    quit();
+  }
+ }
+ )
+}
+
+
+function addEmployee() {
+    // all your code in here
+}
+
+function removeEmployee() {
+    // all your code in here
+}
+
+Trying using the Projects as reference
+• 07 INS CRUD-Insert/db
+• 08 STU CRUD Insert
+• 09 INS CRUD Delete/db
+• Mini Project
