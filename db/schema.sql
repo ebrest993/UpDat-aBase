@@ -3,7 +3,7 @@ CREATE DATABASE tracker_db;
 
 USE tracker_db;
 
-CREATE TABLE deparment (
+CREATE TABLE department (
   id            INT         NOT NULL,
   name          VARCHAR(30) NOT NULL  
 );
