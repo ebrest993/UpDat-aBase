@@ -2,26 +2,39 @@ const express = require('express');
 const inquirer = require('inquirer');
 
 const apiRoutes = require('./routes');
-const { mysql } = require('./config/connection');
+// const { mysql } = require('./config/connection');
 
-const PORT = process.env.PORT || 3001;
 const app = express();
 
-require('./config/connection');
+// const PORT = process.env.PORT || 3001;
+
+// require('./config/connection');
 // require('./config/connection').mysql();
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+// app.use(express.json());
 
-app.use('/api', apiRoutes);
+// app.use('/api', apiRoutes);
 
-app.use('*', (req, res) => {
-        res.status(404).end();
-    });
+// app.use('*', (req, res) => {
+//         res.status(404).end();
+//     });
     
-    app.listen(PORT, () => {
-            console.log(`Server running on http://localhost:${PORT}`);
-        });
+//     app.listen(PORT, () => {
+//             console.log(`Server running on http://localhost:${PORT}`);
+//         });
+
+const mysql = require('mysql2');
+
+const db = mysql.createConnection(
+  {
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'abracadabra',
+    database: 'tracker_db'
+  },
+  console.log(`Connected to the tracker_db database.`)
+);
 
 const trackEmployee = () => {
     inquirer.prompt([
@@ -36,7 +49,8 @@ const trackEmployee = () => {
                 "View All Roles",
                 "Add Role",
                 "View All Departments",
-                "Add Department"
+                "Add Department",
+                "QUIT"
             ]
         }
     ])
@@ -63,13 +77,26 @@ const trackEmployee = () => {
         if(choice === "Add Department"){
             addDepartment();
         }
+        if(choice === "QUIT"){
+            quitInquirer();
+        }
     })
     
     const viewEmployees = () => {
         console.info('D I S P L A Y   T A B L E   H E R E');
-        trackEmployee();
-    }
-    
+        db.query(
+            `SELECT first_name, last_name FROM employee`,
+            // `SELECT title, salary FROM roles`,
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            console.info(result)
+            // .then(() => {
+                trackEmployee();
+            // })
+        })
+    };
     const addEmployee = () => {
         inquirer.prompt([
             {
@@ -91,7 +118,6 @@ const trackEmployee = () => {
         });    
     }
 
-    
     const updateEmployeeRole = () => {
         inquirer.prompt([
             {
@@ -133,12 +159,10 @@ const trackEmployee = () => {
         });        
     }
         
-        
     const viewRoles = () => {
         console.log('D I S P L A Y   T A B L E   H E R E');
         trackEmployee();
     }
-    
     
     const addRole = () => {
         inquirer.prompt([
@@ -176,8 +200,9 @@ const trackEmployee = () => {
             trackEmployee();
         })
     }
+    const quitInquirer = () => {
+        return;
+    }
 }
 
-
-// trackEmployee();
-
+trackEmployee();
