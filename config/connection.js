@@ -15,7 +15,8 @@ module.exports = {
         console.log(`Connected to the tracker_db database.`)
       );
     }
-
     return db;
   }
 };
+
+

@@ -2,6 +2,7 @@ const express = require('express');
 const inquirer = require('inquirer');
 
 const apiRoutes = require('./routes');
+const { mysql } = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -145,4 +146,7 @@ const trackEmployee = () => {
     }
 }
 
+
 trackEmployee();
+
+console.log(mysql.value);
