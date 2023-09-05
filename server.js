@@ -99,7 +99,6 @@ const trackEmployee = () => {
                     if (err) { 
                         console.log(err);
                     } 
-                    trackEmployee();
                 })
             console.info("- - - - - New employee added! - - - - -")
         })
@@ -184,7 +183,6 @@ const trackEmployee = () => {
                     if (err) {
                         console.log(err); 
                     }
-                    trackEmployee();
                 })    
             console.info("- - - - - New role added! - - - - -")
         })
