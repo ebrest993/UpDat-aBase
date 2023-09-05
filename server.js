@@ -47,7 +47,7 @@ const trackEmployee = () => {
             addEmployee();
         }
         if(choice === "Update Employee Role"){
-            updateRole();
+            updateEmployeeRole();
         }
         if(choice === "View All Roles"){
             viewRoles();
@@ -64,7 +64,7 @@ const trackEmployee = () => {
     })
     
     const viewEmployees = () => {
-        console.log("figure out how to display schema table");
+        console.info('D I S P L A Y   T A B L E   H E R E');
         trackEmployee();
     }
     
@@ -81,16 +81,36 @@ const trackEmployee = () => {
                 message:"What is the employee's last name?"
             }
         ])
-    trackEmployee();
+        .then(() => {
+            console.info("- - - - - New employee added! - - - - -")
+        })
+        .then(() => {
+            trackEmployee();
+        });    
     }
 
     
-    const updateRole = () => {
+    const updateEmployeeRole = () => {
         inquirer.prompt([
             {
-                name:"update_role",
+                name:"update_role1",
                 type: "list",
-                message:"Which role would you like to update?",
+                message:"Which employee's role would you like to update?",
+                choices: [
+                    "employee1",
+                    "employee2",
+                    "employee3",
+                    "employee4",
+                    "employee5",
+                    "employee6",
+                    "employee7",
+                    "employee8"
+                ],
+            },
+            {
+                name:"update_role2",
+                type: "list",
+                message:"Which role would you like to assign them?",
                 choices: [
                     "Sales Lead",
                     "Salesperson",
@@ -100,16 +120,20 @@ const trackEmployee = () => {
                     "Accountant",
                     "Legal Team Lead",
                     "Lawyer"
-                ]
+                ],
             }
         ])
-        .then(() => {console.info('You need to come back and add all the stipulations of what comes next.');})
+        .then(() => {
+            console.info("- - - - - Role updated! - - - - -")
+        })
+        .then(() => {
             trackEmployee();
-        }
+        });        
+    }
         
         
     const viewRoles = () => {
-        console.log('find out how to display all the roles');
+        console.log('D I S P L A Y   T A B L E   H E R E');
         trackEmployee();
     }
     
@@ -122,14 +146,18 @@ const trackEmployee = () => {
                 message:"What is the name of the new role?"
             },
         ])
-        .then(() => {console.info('You need to figure out how to add the new role to the table data')})
+        .then(() => {
+            console.info("- - - - - New role added! - - - - -")
+        })
+        .then(() => {
             trackEmployee();
+        });    
     }
     
-        const viewDepartments = () => {
-            console.log('find out how to display the departments');
-            trackEmployee();
-        }
+    const viewDepartments = () => {
+        console.log('D I S P L A Y   T A B L E   H E R E')
+        trackEmployee();
+    };
         
     const addDepartment = () => {
         inquirer.prompt([
@@ -140,7 +168,9 @@ const trackEmployee = () => {
             },
         ])
         .then(() => {
-            console.info('You need to figure out how to add this to the table data')
+            console.info("- - - - - New department added! - - - - -")
+        })
+        .then(() => {
             trackEmployee();
         })
     }
@@ -149,4 +179,3 @@ const trackEmployee = () => {
 
 trackEmployee();
 
-console.log(mysql.value);
