@@ -6,24 +6,6 @@ const apiRoutes = require('./routes');
 
 const app = express();
 
-// const PORT = process.env.PORT || 3001;
-
-// require('./config/connection');
-// require('./config/connection').mysql();
-
-// app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
-
-// app.use('/api', apiRoutes);
-
-// app.use('*', (req, res) => {
-//         res.status(404).end();
-//     });
-    
-//     app.listen(PORT, () => {
-//             console.log(`Server running on http://localhost:${PORT}`);
-//         });
-
 const mysql = require('mysql2');
 
 const db = mysql.createConnection(
@@ -34,15 +16,15 @@ const db = mysql.createConnection(
     database: 'tracker_db'
   },
   console.log(`Connected to the tracker_db database.`)
-);
+); 
 
 const trackEmployee = () => {
     inquirer.prompt([
         {
             name:"choice",
-            type:"list",
+            type:"list", 
             message:"What would you like to do?",
-            choices: [
+            choices: [ 
                 "View All Employees",
                 "Add Employee",
                 "Update Employee Role",
@@ -91,36 +73,39 @@ const trackEmployee = () => {
                     console.log(err);
                 }
                 console.info(result)
-                db.query(
-                    `SELECT title, salary FROM roles`,
-                    (err, result) => {
-                        if (err) {
-                            console.log(err);
-                        }
-                        console.info(result)
-                        trackEmployee();
-                    })
-                })
-    };
+                trackEmployee();
+        })
+    }
+    
     const addEmployee = () => {
         inquirer.prompt([
             {
-                name:"add_first_name",
+                name:"addFirstName",
                 type:"input",
                 message:"What is the employee's first name?"
             },
             {
-                name:"add_second_name",
+                name:"addLastName",
                 type:"input",
                 message:"What is the employee's last name?"
-            }
+            },
         ])
-        .then(() => {
+        .then(({ addFirstName, addLastName }) => {  
+            const newFirstName = addFirstName;
+            const newLastName = addLastName; 
+            db.query( 
+                `INSERT INTO employee ( first_name, last_name ) VALUES ( '${newFirstName}', '${newLastName}' )`,
+                (err, result) => {
+                    if (err) { 
+                        console.log(err);
+                    } 
+                    trackEmployee();
+                })
             console.info("- - - - - New employee added! - - - - -")
         })
         .then(() => {
             trackEmployee();
-        });    
+        });
     }
 
     const updateEmployeeRole = () => {
@@ -168,7 +153,7 @@ const trackEmployee = () => {
         console.log('D I S P L A Y   T A B L E   H E R E');
         db.query(
             `SELECT title, salary FROM roles`,
-            (err, result) => {
+            (err, result) => { 
                 if (err) {
                     console.log(err);
                 }
@@ -180,18 +165,33 @@ const trackEmployee = () => {
     const addRole = () => {
         inquirer.prompt([
             {
-                name:"add_role",
+                name:"title",
                 type:"input",
                 message:"What is the name of the new role?"
             },
+            {
+                name:"salary",
+                type:"input",
+                message:"What is the salary for this new role?"
+            },
         ])
-        .then(() => {
+        .then(({ title, salary}) => { 
+            const newTitle = title;
+            const newSalary = salary;
+            db.query( 
+                `INSERT INTO roles ( title, salary ) VALUES ( '${newTitle}', ${newSalary} )`,
+                (err, result) => {
+                    if (err) {
+                        console.log(err); 
+                    }
+                    trackEmployee();
+                })    
             console.info("- - - - - New role added! - - - - -")
         })
-        .then(() => {
+        .then(() => { 
             trackEmployee();
         });    
-    }
+    } 
     
     const viewDepartments = () => {
         console.log('D I S P L A Y   T A B L E   H E R E')
@@ -215,7 +215,7 @@ const trackEmployee = () => {
             },
         ])
         .then((answer) => {
-            console.info(answer)
+            console.info(answer) 
             console.info("- - - - - New department added! - - - - -")
         })
         .then(() => {

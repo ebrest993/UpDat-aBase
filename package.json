@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "my server",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon --config ./nodemon.json ./server.js"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

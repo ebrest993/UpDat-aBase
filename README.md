@@ -254,7 +254,7 @@ Trying using the Projects as reference
 
 Okay so there are a few issues here
 7:19
-For one, this app is a node command line application, meaning it will run directly in the command line. Since that's the case, it won't use the browser at all, so no need for express or routes of any kind
+<!-- For one, this app is a node command line application, meaning it will run directly in the command line. Since that's the case, it won't use the browser at all, so no need for express or routes of any kind
 7:20
 The way this app works is you're meant to start the app in your command line and then a prompt will be printed to the command line using inquirer, and then do specific tasks based on the prompts/user responses
 :white_check_mark:
@@ -268,5 +268,5 @@ After you've done that, you will want to call your trackEmployee function when t
 1
 
 New
-7:27
+7:27 -->
 Next, I would remove the database query from your config file. Then I would start with the viewEmployees function. In there, try to query the database for all employees, and log them to the terminal. Once you're able to do that, try to do the same for the departments
