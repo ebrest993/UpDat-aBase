@@ -2,7 +2,6 @@ const express = require('express');
 const inquirer = require('inquirer');
 
 const apiRoutes = require('./routes');
-// const { mysql } = require('./config/connection');
 
 const app = express();
 
@@ -15,7 +14,8 @@ const db = mysql.createConnection(
     password: 'abracadabra',
     database: 'tracker_db'
   },
-  console.log(`Connected to the tracker_db database.`)
+  console.log(`Connected to the tracker_db database.`),
+  console.log(),
 ); 
 
 const trackEmployee = () => {
@@ -65,18 +65,18 @@ const trackEmployee = () => {
     })
     
     const viewEmployees = () => {
-        console.info('D I S P L A Y   T A B L E   H E R E');
         db.query(
             `SELECT id, first_name, last_name, role_id FROM employee`,
             (err, result) => {
                 if (err) {
                     console.log(err);
                 }
-                console.info(result)
+                console.table(result) 
+                // console.info({role_id})
                 trackEmployee();
         })
     }
-    
+     
     const addEmployee = () => {
         inquirer.prompt([
             {
@@ -85,7 +85,7 @@ const trackEmployee = () => {
                 message:"What is the employee's first name?"
             },
             {
-                name:"addLastName",
+                name:"addLastName", 
                 type:"input",
                 message:"What is the employee's last name?"
             },
@@ -108,20 +108,24 @@ const trackEmployee = () => {
     }
 
     const updateEmployeeRole = () => {
+        console.log(names)
         inquirer.prompt([
             {
                 name:"update_role1",
                 type: "list",
                 message:"Which employee's role would you like to update?",
                 choices: [
-                    "employee1",
-                    "employee2",
-                    "employee3",
-                    "employee4",
-                    "employee5",
-                    "employee6",
-                    "employee7",
-                    "employee8"
+                    db.query(
+                        `SELECT * FROM employee`
+                    )
+                    // "employee1",
+                    // "employee2",
+                    // "employee3", 
+                    // "employee4",
+                    // "employee5",
+                    // "employee6",
+                    // "employee7",
+                    // "employee8"
                 ],
             },
             {
@@ -156,7 +160,7 @@ const trackEmployee = () => {
                 if (err) {
                     console.log(err);
                 }
-                console.info(result)
+                console.table(result)
                 trackEmployee();
             })
     }
@@ -192,32 +196,31 @@ const trackEmployee = () => {
     } 
     
     const viewDepartments = () => {
-        console.log('D I S P L A Y   T A B L E   H E R E')
         db.query(
             `SELECT name FROM department`,
             (err, result) => {
                 if (err) {
                     console.log(err);
                 }
-                console.info(result)
-                trackEmployee();
+                console.table(result)
+                trackEmployee(); 
             }
-        )
+        ) 
     };
         
     const addDepartment = () => {
         inquirer.prompt([
-            {
+            { 
                 name:"add_department",
-                type:"input",
+                type:"input", 
                 message:"What is the name of the new department?"
             },
-        ])
+        ]) 
         .then((add_department) => {
             const newDept = add_department;
-            // console.info(newDept);
+            console.info('Department name: ', newDept.add_department);
             db.query( 
-                `INSERT INTO department ( name ) VALUES ( '${newDept}' )`,
+                `INSERT INTO department ( name ) VALUES ( '${newDept.add_department}' )`,
                 (err, result) => {
                     if (err) { 
                         console.log(err);
