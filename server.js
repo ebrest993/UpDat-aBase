@@ -67,7 +67,7 @@ const trackEmployee = () => {
     const viewEmployees = () => {
         console.info('D I S P L A Y   T A B L E   H E R E');
         db.query(
-            `SELECT first_name, last_name FROM employee`,
+            `SELECT id, first_name, last_name FROM employee`,
             (err, result) => {
                 if (err) {
                     console.log(err);
@@ -148,11 +148,11 @@ const trackEmployee = () => {
             trackEmployee();
         });        
     }
-        
+         
     const viewRoles = () => {
         console.log('D I S P L A Y   T A B L E   H E R E');
         db.query(
-            `SELECT title, salary FROM roles`,
+            `SELECT id, title, salary FROM roles`,
             (err, result) => { 
                 if (err) {
                     console.log(err);
@@ -203,7 +203,8 @@ const trackEmployee = () => {
                 }
                 console.info(result)
                 trackEmployee();
-            })
+            }
+        )
     };
         
     const addDepartment = () => {
@@ -214,27 +215,30 @@ const trackEmployee = () => {
                 message:"What is the name of the new department?"
             },
         ])
-        .then((answer) => {
-            console.info(answer) 
-            console.info("- - - - - New department added! - - - - -")
-        })
-        .then(() => {
-            db.query(
-                `SELECT name FROM department`,
+        .then((add_department) => {
+            const newDept = add_department;
+            // console.info(newDept);
+            db.query( 
+                `INSERT INTO department ( name ) VALUES ( '${newDept}' )`,
                 (err, result) => {
-                    if (err) {
+                    if (err) { 
                         console.log(err);
-                    }
-                    console.info(result)
-                    trackEmployee();
-                })
-    
+                    } 
+                }
+            )
+
+            console.info("- - - - - New department added! - - - - -");
+        })
+
+        .then(() => {
             trackEmployee();
         })
     }
+
     const quitInquirer = () => {
         return;
     }
+
 }
 
 trackEmployee();
