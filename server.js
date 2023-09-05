@@ -67,7 +67,7 @@ const trackEmployee = () => {
     const viewEmployees = () => {
         console.info('D I S P L A Y   T A B L E   H E R E');
         db.query(
-            `SELECT id, first_name, last_name FROM employee`,
+            `SELECT id, first_name, last_name, role_id FROM employee`,
             (err, result) => {
                 if (err) {
                     console.log(err);
@@ -96,7 +96,7 @@ const trackEmployee = () => {
             db.query( 
                 `INSERT INTO employee ( first_name, last_name ) VALUES ( '${newFirstName}', '${newLastName}' )`,
                 (err, result) => {
-                    if (err) { 
+                    if (err) {  
                         console.log(err);
                     } 
                 })
