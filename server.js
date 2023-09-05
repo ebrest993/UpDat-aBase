@@ -7,20 +7,22 @@ const { mysql } = require('./config/connection');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-require('./config/connection').mysql();
+require('./config/connection');
+// require('./config/connection').mysql();
 
-// app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-// app.use('/api', apiRoutes);
+app.use('/api', apiRoutes);
 
-// app.use('*', (req, res) => {
-    //     res.status(404).end();
-    // });
+app.use('*', (req, res) => {
+        res.status(404).end();
+    });
     
-    // app.listen(PORT, () => {
-        //     console.log(`Server running on http://localhost:${PORT}`);
-        // });
+    app.listen(PORT, () => {
+            console.log(`Server running on http://localhost:${PORT}`);
+        });
+
 const trackEmployee = () => {
     inquirer.prompt([
         {
@@ -177,5 +179,5 @@ const trackEmployee = () => {
 }
 
 
-trackEmployee();
+// trackEmployee();
 
