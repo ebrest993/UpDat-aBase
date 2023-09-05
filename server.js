@@ -86,16 +86,21 @@ const trackEmployee = () => {
         console.info('D I S P L A Y   T A B L E   H E R E');
         db.query(
             `SELECT first_name, last_name FROM employee`,
-            // `SELECT title, salary FROM roles`,
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            }
-            console.info(result)
-            // .then(() => {
-                trackEmployee();
-            // })
-        })
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.info(result)
+                db.query(
+                    `SELECT title, salary FROM roles`,
+                    (err, result) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.info(result)
+                        trackEmployee();
+                    })
+                })
     };
     const addEmployee = () => {
         inquirer.prompt([
@@ -161,7 +166,15 @@ const trackEmployee = () => {
         
     const viewRoles = () => {
         console.log('D I S P L A Y   T A B L E   H E R E');
-        trackEmployee();
+        db.query(
+            `SELECT title, salary FROM roles`,
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.info(result)
+                trackEmployee();
+            })
     }
     
     const addRole = () => {
@@ -182,7 +195,15 @@ const trackEmployee = () => {
     
     const viewDepartments = () => {
         console.log('D I S P L A Y   T A B L E   H E R E')
-        trackEmployee();
+        db.query(
+            `SELECT name FROM department`,
+            (err, result) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.info(result)
+                trackEmployee();
+            })
     };
         
     const addDepartment = () => {
@@ -193,10 +214,21 @@ const trackEmployee = () => {
                 message:"What is the name of the new department?"
             },
         ])
-        .then(() => {
+        .then((answer) => {
+            console.info(answer)
             console.info("- - - - - New department added! - - - - -")
         })
         .then(() => {
+            db.query(
+                `SELECT name FROM department`,
+                (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    console.info(result)
+                    trackEmployee();
+                })
+    
             trackEmployee();
         })
     }
