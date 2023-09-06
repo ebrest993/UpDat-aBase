@@ -160,12 +160,11 @@ const trackEmployee = () => {
     };
          
     const viewRoles = () => {
-        console.log('D I S P L A Y   T A B L E   H E R E'); 
         db.query(
             `SELECT id, title, salary FROM roles`,
             (err, result) => { 
                 if (err) {
-                    console.log(err);
+                    console.log(err); 
                 }
                 console.table(result)
                 trackEmployee();
@@ -204,7 +203,7 @@ const trackEmployee = () => {
     
     const viewDepartments = () => {
         db.query(
-            `SELECT name FROM department`,
+            `SELECT id, name FROM department`,
             (err, result) => {
                 if (err) {
                     console.log(err);
