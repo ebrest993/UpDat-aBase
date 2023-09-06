@@ -2,7 +2,7 @@ const express = require('express');
 const inquirer = require('inquirer');
 
 const apiRoutes = require('./routes');
-
+ 
 const app = express();
 
 const mysql = require('mysql2');
@@ -72,7 +72,6 @@ const trackEmployee = () => {
                     console.log(err);
                 }
                 console.table(result) 
-                // console.info({role_id})
                 trackEmployee();
         })
     }
@@ -108,52 +107,60 @@ const trackEmployee = () => {
     }
 
     const updateEmployeeRole = () => {
-        console.log(names)
-        inquirer.prompt([
-            {
-                name:"update_role1",
-                type: "list",
-                message:"Which employee's role would you like to update?",
-                choices: [
-                    db.query(
-                        `SELECT * FROM employee`
-                    )
-                    // "employee1",
-                    // "employee2",
-                    // "employee3", 
-                    // "employee4",
-                    // "employee5",
-                    // "employee6",
-                    // "employee7",
-                    // "employee8"
-                ],
-            },
-            {
-                name:"update_role2",
-                type: "list",
-                message:"Which role would you like to assign them?",
-                choices: [
-                    "Sales Lead",
-                    "Salesperson",
-                    "Lead Engineer",
-                    "Software Engineer",
-                    "Account Manager",
-                    "Accountant",
-                    "Legal Team Lead",
-                    "Lawyer"
-                ],
-            }
-        ])
-        .then(() => {
-            console.info("- - - - - Role updated! - - - - -")
-        })
-        .then(() => {
-            trackEmployee();
-        });        
-    }
+        db.promise()
+            .query(`SELECT * FROM employee`)
+            .then(([rows]) => {
+                let employees = rows;
+                const employeeChoices = employees.map(
+                    ({ id, first_name, last_name }) => ({
+                        name: `${first_name} ${last_name}`,
+                        value: id,
+                    })
+                );
+
+                console.log(employeeChoices);
+                inquirer
+                    .prompt([
+                        {
+                            name: 'choose_employee',
+                            type: 'list',
+                            message: "Which employee's role would you like to update?",
+                            choices: employeeChoices,
+                        },
+                        {
+                            name: 'update_role',
+                            type: 'list',
+                            message: 'Which role would you like to assign them?',
+                            choices: [
+                                'Sales Lead',
+                                'Salesperson',
+                                'Lead Engineer',
+                                'Software Engineer',
+                                'Account Manager',
+                                'Accountant',
+                                'Legal Team Lead',
+                                'Lawyer',
+                            ],
+                        },
+                    ])  
+                    .then((employeeChoices, update_role) => {
+                        const chosenEmployee = employeeChoices;
+                            console.log('The droids you are looking for are: ', chosenEmployee.choose_employee);
+                        const updateRole = update_role;
+                            console.log('The droids you are looking for are: ', updateRole);
+                        db.query(
+                            `SELECT id, title FROM roles WHERE id=${chosenEmployee.choose_employee}`
+                        )
+                        console.info('- - - - - Role updated! - - - - -'); 
+                    })
+                    .then(() => {
+                        trackEmployee();
+                    });
+            });
+    };
          
     const viewRoles = () => {
-        console.log('D I S P L A Y   T A B L E   H E R E');
+        console.log('D I S P L A Y   T A B L E   H E R E'); 
         db.query(
             `SELECT id, title, salary FROM roles`,
             (err, result) => { 
