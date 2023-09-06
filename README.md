@@ -35,6 +35,32 @@ added to the database
 <!-- their new role -->
 updated in the database 
 
+## GitHub repository 10%
+<!-- link to repo that has code in it -->
+
+## Walkthrough Video 27%
+video included
+link to video included
+all technical acceptance criteria being met
+<!-- invoking the application via the command line -->
+<!-- functional menu -->
+
+## Technical Acceptance 40%
+<!-- uses inquirer -->
+<!-- uses mysql2 -->
+follows table schema from demo video
+
+## Repository quality 13%
+<!-- Unique Name -->
+<!-- best practices for filing and naming -->
+<!-- correct formatting -->
+<!-- numerous commit messages -->
+High quality readme
+link to walkthrough video
+
+## Application Quality 10%
+<!-- App is intuitive and easy to use -->
+
 
 
 
@@ -47,9 +73,7 @@ updated in the database
 2. [Installation](./README.md#installation)
 3. [Usage](./README.md#usage)
 4. [Contributing](./README.md#contributing)
-5. 
-6. [Test](./README.md#test)
-7. [Contact](./README.md#contact)
+5. [Contact](./README.md#contact)
 
 ## Description ##
     
