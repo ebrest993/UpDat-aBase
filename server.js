@@ -1,17 +1,17 @@
 const express = require('express');
 const inquirer = require('inquirer');
 
-const apiRoutes = require('./routes');
+const api = require('./routes');
  
 const app = express();
-
+  
 const mysql = require('mysql2');
 
-const db = mysql.createConnection(
-  {
-    host: '127.0.0.1',
-    user: 'root',
-    password: 'abracadabra',
+const db = mysql.createConnection( 
+  {  
+    host: '127.0.0.1',  
+    user: 'root',  
+    password: 'abracadabra', 
     database: 'tracker_db'
   },
   console.log(`Connected to the tracker_db database.`),

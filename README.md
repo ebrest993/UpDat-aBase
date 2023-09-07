@@ -83,13 +83,16 @@ This project makes quick work of an SQL database to view, add, or edit employees
 
 ## Installation ##
 
-Upon cloning, run 'npm install' followed by the following: inquirer@8.2.4 nodemon, mysql, mysql2, 
+Upon cloning, run 'npm install' as well as the following: 
+'npm i inquirer@8.2.4' 
+'npm i mysql'
+'npm i mysql2' 
 
 #############
 
 ## Usage ##
 
-To run the application, enter 'node server.js' into the terminal at the root of the project
+To run the application, enter 'node server.js' into the terminal at the root of the application
 
 #############
 
@@ -104,6 +107,8 @@ https://github.com/ebrest993/UpDat-aBase
 ## Contact ##
 
 For any questions or to contact the developer directly:
+
+Elliott Brest
 
 email: elliott.brest@gmail.com
 
