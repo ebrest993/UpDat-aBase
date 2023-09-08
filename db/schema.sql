@@ -3,11 +3,6 @@ CREATE DATABASE tracker_db;
 
 USE tracker_db;
 
-SELECT * FROM roles 
-LEFT JOIN employee ON roles.id = employee.role_id;
-
-SELECT * FROM department 
-LEFT JOIN roles ON department.id = roles.department_id; 
 
 CREATE TABLE department (
   id            INT         AUTO_INCREMENT,
@@ -32,5 +27,5 @@ CREATE TABLE employee (
   manager_id    INT,
   PRIMARY KEY (id),
   FOREIGN KEY (role_id) REFERENCES roles(id)
-  -- FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE SET NULL
 );
+

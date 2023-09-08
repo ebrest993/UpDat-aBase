@@ -8,7 +8,7 @@ const app = express();
 const mysql = require('mysql2');
 
 const db = mysql.createConnection( 
-  {  
+  {   
     host: '127.0.0.1',  
     user: 'root',  
     password: 'abracadabra', 
@@ -17,7 +17,7 @@ const db = mysql.createConnection(
   console.log(`Connected to the tracker_db database.`),
   console.log(),
 ); 
-
+ 
 const trackEmployee = () => {
     inquirer.prompt([
         {
@@ -67,17 +67,23 @@ const trackEmployee = () => {
     const viewEmployees = () => {
         db.query(
             `SELECT id, first_name, last_name, role_id FROM employee`,
-            (err, result) => {
-                if (err) {
-                    console.log(err);
-                }
-                console.table(result) 
-                trackEmployee();
-        })
+                    (err, result) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.table(result) 
+                        trackEmployee();
+                    });
     }
-     
-    const addEmployee = () => {
-        inquirer.prompt([
+      
+    const addEmployee = () => { 
+        db.promise()
+            .query(`SELECT * FROM roles`) 
+            .then(([rows]) => {  
+                let newEmployeeRole = rows.id;        
+                console.info(newEmployeeRole);
+            }) 
+                inquirer.prompt([
             {
                 name:"addFirstName",
                 type:"input",
@@ -88,6 +94,14 @@ const trackEmployee = () => {
                 type:"input",
                 message:"What is the employee's last name?"
             },
+            {
+                name:"assignRole",
+                type:"list",
+                message:"What role would you like to assign them?",
+                choices: [
+
+                ]
+            }
         ])
         .then(({ addFirstName, addLastName }) => {  
             const newFirstName = addFirstName;
@@ -118,10 +132,10 @@ const trackEmployee = () => {
                     })
                 );
 
-                console.log(employeeChoices);
+                console.log();
                 inquirer
                     .prompt([
-                        {
+                        { 
                             name: 'choose_employee',
                             type: 'list',
                             message: "Which employee's role would you like to update?",
@@ -145,9 +159,9 @@ const trackEmployee = () => {
                     ])  
                     .then((employeeChoices, update_role) => {
                         const chosenEmployee = employeeChoices;
-                            console.log('The droids you are looking for are: ', chosenEmployee.choose_employee);
+                            // console.log('The droids you are looking for are: ', chosenEmployee.choose_employee);
                         const updateRole = update_role;
-                            console.log('The droids you are looking for are: ', updateRole);
+                            // console.log('The droids you are looking for are: ', updateRole);
                         db.query(
                             `SELECT id, title FROM roles WHERE id=${chosenEmployee.choose_employee}`
                         )
