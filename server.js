@@ -11,7 +11,7 @@ const db = mysql.createConnection(
   {   
     host: '127.0.0.1',  
     user: 'root',  
-    password: 'abracadabra', 
+    password: 'abracadabra',  
     database: 'tracker_db'
   },
   console.log(`Connected to the tracker_db database.`),
@@ -30,7 +30,7 @@ const trackEmployee = () => {
                 "Update Employee Role",
                 "View All Roles",
                 "Add Role",
-                "View All Departments",
+                "View All Departments", 
                 "Add Department",
                 "QUIT"
             ]
@@ -79,12 +79,10 @@ const trackEmployee = () => {
     const addEmployee = () => { 
         db.promise()
             .query(`SELECT * FROM roles`) 
-            .then(([rows]) => {  
-                let newEmployeeRole = rows.id;        
-                console.info(newEmployeeRole);
+            .then(() => {  
             }) 
                 inquirer.prompt([
-            {
+            { 
                 name:"addFirstName",
                 type:"input",
                 message:"What is the employee's first name?"
@@ -99,9 +97,16 @@ const trackEmployee = () => {
                 type:"list",
                 message:"What role would you like to assign them?",
                 choices: [
-
+                    'Sales Lead',
+                    'Salesperson',
+                    'Lead Engineer',
+                    'Software Engineer',
+                    'Account Manager',
+                    'Accountant',
+                    'Legal Team Lead',
+                    'Lawyer',
                 ]
-            }
+            },
         ])
         .then(({ addFirstName, addLastName }) => {  
             const newFirstName = addFirstName;
@@ -159,9 +164,7 @@ const trackEmployee = () => {
                     ])  
                     .then((employeeChoices, update_role) => {
                         const chosenEmployee = employeeChoices;
-                            // console.log('The droids you are looking for are: ', chosenEmployee.choose_employee);
                         const updateRole = update_role;
-                            // console.log('The droids you are looking for are: ', updateRole);
                         db.query(
                             `SELECT id, title FROM roles WHERE id=${chosenEmployee.choose_employee}`
                         )

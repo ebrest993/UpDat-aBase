@@ -1,70 +1,3 @@
-## view all departments
-<!-- department names -->
-<!-- department ids -->
-
-## all roles
-<!-- job title -->
-<!-- role id -->
-the department that role belongs to
-<!-- and the salary for that role -->
-
-## all employees
-<!-- employee ids -->
-<!-- first names -->
-<!-- last names -->
-job titles
-departments
-salaries
-managers that the employees report to
-
-## add a role
-<!-- name -->
-<!-- salary -->
-department
-added to the database
-
-## add an employee
-<!-- first name -->
-<!-- last name -->
-role
-manager
-added to the database
-
-## update employee role
-<!-- employee to update -->
-<!-- their new role -->
-updated in the database 
-
-## GitHub repository 10%
-<!-- link to repo that has code in it -->
-
-## Walkthrough Video 27%
-video included
-link to video included
-all technical acceptance criteria being met
-<!-- invoking the application via the command line -->
-<!-- functional menu -->
-
-## Technical Acceptance 40%
-<!-- uses inquirer -->
-<!-- uses mysql2 -->
-follows table schema from demo video
-
-## Repository quality 13%
-<!-- Unique Name -->
-<!-- best practices for filing and naming -->
-<!-- correct formatting -->
-<!-- numerous commit messages -->
-High quality readme
-link to walkthrough video
-
-## Application Quality 10%
-<!-- App is intuitive and easy to use -->
-
-
-
-
-
 # Employee Tracker #
 
 
@@ -93,6 +26,10 @@ Upon cloning, run 'npm install' as well as the following:
 ## Usage ##
 
 To run the application, enter 'node server.js' into the terminal at the root of the application
+
+[Demo Video for Employee Tracker Project](./assets/demoVideo.mp4)
+
+[Google Drive Link to Video](https://drive.google.com/file/d/1_Z2ZHoRh_Lplc6YA5hdFSHceE-kiZupW/view?usp=drive_link) 
 
 #############
 
